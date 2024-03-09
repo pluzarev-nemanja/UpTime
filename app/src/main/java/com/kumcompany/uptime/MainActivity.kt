@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.kumcompany.uptime.navigation.SetupNavGraph
+import com.kumcompany.uptime.presentation.screens.main.MainScreen
 import com.kumcompany.uptime.ui.theme.UpTimeTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +27,9 @@ class MainActivity : ComponentActivity() {
 
                 navController = rememberNavController()
 
-                SetupNavGraph(navController = navController)
+                MainScreen(
+                    navController = navController
+                )
             }
         }
     }

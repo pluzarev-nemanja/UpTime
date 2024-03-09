@@ -107,6 +107,9 @@ dependencies {
     // Palette API
     implementation "androidx.palette:palette-ktx:1.0.0"
 
+    //animated navigation compose
+    implementation("com.exyte:animated-navigation-bar:1.0.0")
+
     // Testing
     androidTestImplementation "androidx.test:runner:1.5.2"
     androidTestImplementation "androidx.test:rules:1.5.0"

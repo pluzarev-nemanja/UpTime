@@ -6,19 +6,25 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.kumcompany.uptime.presentation.screens.home.HomeScreen
+import com.kumcompany.uptime.presentation.screens.welcome.WelcomeScreen
 import com.kumcompany.uptime.util.Constants.DETAILS_ARGUMENT_KEY
 
 @Composable
 fun SetupNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    startDestination: String
 ) {
 
-    NavHost(navController = navController, startDestination = Screen.Home.route){
-        composable(Screen.Welcome.route){
+    NavHost(navController = navController, startDestination = startDestination){
 
+        composable(Screen.Welcome.route){
+            WelcomeScreen(
+                navController = navController
+            )
         }
         composable(Screen.Home.route){
-
+            HomeScreen()
         }
         composable(Screen.Details.route,
             arguments = listOf(

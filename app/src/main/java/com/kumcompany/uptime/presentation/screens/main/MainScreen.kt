@@ -30,7 +30,8 @@ import com.kumcompany.uptime.navigation.SetupNavGraph
 
 @Composable
 fun MainScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    startDestination : String
 ) {
 
     val navigationBarItems = remember {
@@ -40,10 +41,11 @@ fun MainScreen(
         mutableStateOf(0)
     }
     Scaffold(
-        modifier = Modifier.padding(12.dp),
         bottomBar = {
             AnimatedNavigationBar(
-                modifier = Modifier.height(64.dp),
+                modifier = Modifier
+                    .padding(12.dp)
+                    .height(64.dp),
                 selectedIndex = selectedIndex,
                 cornerRadius = shapeCornerRadius(cornerRadius = 34.dp),
                 ballAnimation = Parabolic(tween(300)),
@@ -71,6 +73,6 @@ fun MainScreen(
             }
         }
     ) { paddingValues ->
-        SetupNavGraph(navController = navController)
+        SetupNavGraph(navController = navController,startDestination)
     }
 }

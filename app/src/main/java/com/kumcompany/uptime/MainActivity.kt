@@ -15,7 +15,9 @@ import androidx.navigation.compose.rememberNavController
 import com.kumcompany.uptime.navigation.SetupNavGraph
 import com.kumcompany.uptime.presentation.screens.main.MainScreen
 import com.kumcompany.uptime.ui.theme.UpTimeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController

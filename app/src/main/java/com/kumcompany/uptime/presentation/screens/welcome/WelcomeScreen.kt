@@ -27,7 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.kumcompany.uptime.domain.model.OnBoardingPage
-import com.kumcompany.uptime.navigation.Screen
+import com.kumcompany.uptime.navigation.routes.Graphs
+import com.kumcompany.uptime.navigation.routes.Screen
 import com.kumcompany.uptime.presentation.components.HorizontalPagerIndicator
 import com.kumcompany.uptime.util.Constants.LAST_ON_BOARDING_PAGE
 import com.kumcompany.uptime.util.Constants.ON_BOARDING_PAGE_COUNT
@@ -69,7 +70,7 @@ fun WelcomeScreen(
         )
         FinishButton(pagerState = pagerState, modifier = Modifier.weight(1f)) {
             navController.popBackStack()
-            navController.navigate(Screen.Home.route)
+            navController.navigate(Graphs.MAIN.route)
             welcomeViewModel.saveOnBoardingState(completed = true)
         }
     }

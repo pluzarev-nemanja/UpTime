@@ -1,4 +1,4 @@
-package com.kumcompany.uptime.navigation
+package com.kumcompany.uptime.navigation.routes
 
 sealed class Screen(val route: String) {
     object Welcome : Screen("welcome_screen")

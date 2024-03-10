@@ -3,21 +3,14 @@ package com.kumcompany.uptime
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.kumcompany.uptime.domain.use_cases.UseCases
-import com.kumcompany.uptime.navigation.Screen
-import com.kumcompany.uptime.navigation.SetupNavGraph
-import com.kumcompany.uptime.presentation.screens.main.MainScreen
+import com.kumcompany.uptime.navigation.routes.Graphs
+import com.kumcompany.uptime.navigation.graphs.RootNavGraph
 import com.kumcompany.uptime.ui.theme.UpTimeTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +21,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
+
     @Inject
     lateinit var useCases: UseCases
 
@@ -43,10 +37,11 @@ class MainActivity : ComponentActivity() {
 
                     navController = rememberNavController()
 
-                    MainScreen(
+                    RootNavGraph(
                         navController = navController,
-                        startDestination = if (completed) Screen.Home.route else Screen.Welcome.route
+                        startDestination = if (completed) Graphs.MAIN.route else Graphs.WELCOME.route
                     )
+
                 }
 
             }

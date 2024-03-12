@@ -20,7 +20,7 @@ sealed class OnBoardingPage (
         description = "Find new watch models and learn something new about them!"
     )
     object Third: OnBoardingPage(
-        image = R.drawable.watch,
+        image = R.drawable.time,
         title = "Watch Quote",
         description = "`You can’t turn back the clock. But you can wind it up again.`"
     )

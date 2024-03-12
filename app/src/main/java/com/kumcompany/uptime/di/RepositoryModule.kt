@@ -5,6 +5,7 @@ import com.kumcompany.uptime.data.repository.DataStoreOperationsImpl
 import com.kumcompany.uptime.data.repository.Repository
 import com.kumcompany.uptime.domain.repository.DataStoreOperations
 import com.kumcompany.uptime.domain.use_cases.UseCases
+import com.kumcompany.uptime.domain.use_cases.get_all_watches.GetAllWatchesUseCase
 import com.kumcompany.uptime.domain.use_cases.read_onboarding.ReadOnBoardingUseCase
 import com.kumcompany.uptime.domain.use_cases.save_onboarding.SaveOnBoardingUseCase
 import dagger.Module
@@ -31,7 +32,8 @@ object RepositoryModule {
     fun provideUseCases(repository: Repository): UseCases{
         return UseCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
-            readOnBoardingUseCase = ReadOnBoardingUseCase(repository)
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
+            getAllWatchesUseCase = GetAllWatchesUseCase(repository)
         )
     }
 }

@@ -9,7 +9,7 @@ import com.kumcompany.uptime.domain.model.WatchRemoteKeys
 interface WatchRemoteKeysDao {
 
     @Query("SELECT * FROM watch_remote_keys_table WHERE id=:id")
-    suspend fun getRemoteKey(id:Int):WatchRemoteKeys?
+    suspend fun getRemoteKeys(id:Int):WatchRemoteKeys?
 
     @Upsert
     suspend fun addAllRemoteKeys(watchRemoteKeys: List<WatchRemoteKeys>)

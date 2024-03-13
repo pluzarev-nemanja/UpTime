@@ -83,6 +83,6 @@ fun MainScreen(
             }
         }
     ) { paddingValues ->
-        HomeNavGraph(navController = navController)
+        HomeNavGraph(navController = navController,paddingValues)
     }
 }

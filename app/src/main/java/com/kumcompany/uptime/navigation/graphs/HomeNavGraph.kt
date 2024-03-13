@@ -1,5 +1,6 @@
 package com.kumcompany.uptime.navigation.graphs
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -13,14 +14,17 @@ import com.kumcompany.uptime.presentation.screens.search.SearchScreen
 import com.kumcompany.uptime.util.Constants
 
 @Composable
-fun HomeNavGraph(navController: NavHostController) {
+fun HomeNavGraph(navController: NavHostController,bottomPaddingValues: PaddingValues) {
     NavHost(
         navController = navController,
         route = Graphs.MAIN.route,
         startDestination = Screen.Home.route
     ) {
         composable(Screen.Home.route){
-            HomeScreen()
+            HomeScreen(
+                navController = navController,
+                bottomPaddingValues = bottomPaddingValues
+            )
         }
 
         composable(

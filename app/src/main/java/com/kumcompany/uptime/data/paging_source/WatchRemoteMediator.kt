@@ -57,7 +57,8 @@ class WatchRemoteMediator @Inject constructor(
                         WatchRemoteKeys(
                             id = watch.id,
                             prevPage,
-                            nextPage
+                            nextPage,
+                            lastUpdated = response.lastUpdated
                         )
                     }
                     watchRemoteKeysDao.addAllRemoteKeys(keys)
@@ -69,6 +70,19 @@ class WatchRemoteMediator @Inject constructor(
             return MediatorResult.Error(e)
         }
     }
+
+    override suspend fun initialize(): InitializeAction {
+        val currentTime = System.currentTimeMillis()
+        val lastUpdated = watchRemoteKeysDao.getRemoteKeys(id = 1)?.lastUpdated ?: 0L
+        val cacheTimeout = 1440
+        val diffInMinutes = (currentTime - lastUpdated) / 1000 / 60
+        return if(diffInMinutes.toInt() <= cacheTimeout){
+            InitializeAction.SKIP_INITIAL_REFRESH
+        }else{
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
+    }
+
     private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Watch>): WatchRemoteKeys? {
         return state.anchorPosition?.let {position->
             state.closestItemToPosition(position)?.id?.let { id->

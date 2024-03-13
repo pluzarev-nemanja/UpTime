@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -29,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
@@ -38,6 +38,7 @@ import com.kumcompany.uptime.R
 import com.kumcompany.uptime.domain.model.Watch
 import com.kumcompany.uptime.navigation.routes.Screen
 import com.kumcompany.uptime.presentation.components.RatingWidget
+import com.kumcompany.uptime.presentation.components.ShimmerEffect
 import com.kumcompany.uptime.util.Constants.BASE_URL
 
 @Composable
@@ -47,25 +48,61 @@ fun ListContent(
     paddingValues: PaddingValues,
     bottomPaddingValues: PaddingValues
 ) {
-
-    LazyColumn(
-        contentPadding = PaddingValues(
-            top = paddingValues.calculateTopPadding() + 5.dp,
-            start = 10.dp,
-            end = 10.dp,
-            bottom = bottomPaddingValues.calculateBottomPadding() + 5.dp
-        ),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        items(
-            count = watches.itemCount,
-            key = watches.itemKey { it.id },
-            contentType = watches.itemContentType { "contentType" }
-        ) { index ->
-            val item = watches[index]
-            if (item != null) {
-                WatchItem(watch = item, navController = navController)
+    val result = handlePagingResult(watches = watches, paddingValues, bottomPaddingValues)
+    if (result) {
+        LazyColumn(
+            contentPadding = PaddingValues(
+                top = paddingValues.calculateTopPadding() + 5.dp,
+                start = 10.dp,
+                end = 10.dp,
+                bottom = bottomPaddingValues.calculateBottomPadding() + 5.dp
+            ),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            items(
+                count = watches.itemCount,
+                key = watches.itemKey { it.id },
+                contentType = watches.itemContentType { "contentType" }
+            ) { index ->
+                val item = watches[index]
+                if (item != null) {
+                    WatchItem(watch = item, navController = navController)
+                }
             }
+        }
+    }
+}
+
+@Composable
+fun handlePagingResult(
+    watches: LazyPagingItems<Watch>,
+    paddingValues: PaddingValues,
+    bottomPaddingValues: PaddingValues
+): Boolean {
+    watches.apply {
+        val error = when {
+            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+            else -> null
+        }
+        return when {
+            loadState.refresh is LoadState.Loading -> {
+                ShimmerEffect(paddingValues, bottomPaddingValues)
+                false
+            }
+
+            error != null -> {
+                EmptyScreen(error = error, watches = watches)
+                false
+            }
+
+            watches.itemCount < 1 -> {
+                EmptyScreen()
+                false
+            }
+
+            else -> true
         }
     }
 }

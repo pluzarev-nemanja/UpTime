@@ -2,6 +2,8 @@ package com.kumcompany.uptime.presentation.screens.search
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ContentAlpha
@@ -21,6 +23,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.exyte.animatednavbar.animation.indendshape.shapeCornerRadius
 
 @Composable
 fun SearchTopBar(
@@ -46,13 +49,15 @@ fun SearchWidget(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(12.dp)
             .height(56.dp)
             .semantics {
                 contentDescription = "SearchWidget"
             },
         shadowElevation = 5.dp,
-        color = MaterialTheme.colorScheme.primary
-    ) {
+        color = MaterialTheme.colorScheme.primary,
+        shape = RoundedCornerShape(34.dp),
+        ) {
         TextField(
             modifier = Modifier
                 .fillMaxWidth()

@@ -16,6 +16,9 @@ class Repository @Inject constructor(
         return remote.getAllWatches()
     }
 
+    fun searchWatches(query: String):Flow<PagingData<Watch>>{
+        return remote.searchWatches(query)
+    }
     suspend fun saveOnBoardingState(completed: Boolean){
         dataStore.saveOnBoardingState(completed)
     }

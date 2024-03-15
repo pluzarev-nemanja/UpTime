@@ -41,7 +41,10 @@ fun HomeNavGraph(navController: NavHostController,bottomPaddingValues: PaddingVa
         }
 
         composable(Screen.Search.route) {
-            SearchScreen()
+            SearchScreen(
+                bottomPaddingValues = bottomPaddingValues,
+                navController = navController
+            )
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.kumcompany.uptime.navigation.routes.Graphs
 import com.kumcompany.uptime.navigation.routes.Screen
+import com.kumcompany.uptime.presentation.screens.details.DetailsScreen
 import com.kumcompany.uptime.presentation.screens.home.HomeScreen
 import com.kumcompany.uptime.presentation.screens.search.SearchScreen
 import com.kumcompany.uptime.util.Constants
@@ -37,7 +38,9 @@ fun HomeNavGraph(navController: NavHostController,bottomPaddingValues: PaddingVa
                 }
             )
         ) {
-
+            DetailsScreen(
+                navController
+            )
         }
 
         composable(Screen.Search.route) {

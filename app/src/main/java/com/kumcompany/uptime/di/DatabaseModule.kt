@@ -3,6 +3,8 @@ package com.kumcompany.uptime.di
 import android.content.Context
 import androidx.room.Room
 import com.kumcompany.uptime.data.local.WatchDatabase
+import com.kumcompany.uptime.data.repository.LocalDataSourceImpl
+import com.kumcompany.uptime.domain.repository.LocalDataSource
 import com.kumcompany.uptime.util.Constants.WATCH_DATABASE
 import dagger.Module
 import dagger.Provides
@@ -27,5 +29,14 @@ object DatabaseModule {
         ).build()
     }
 
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(
+        database: WatchDatabase
+    ): LocalDataSource{
+        return LocalDataSourceImpl(
+            watchDatabase = database
+        )
+    }
 
 }

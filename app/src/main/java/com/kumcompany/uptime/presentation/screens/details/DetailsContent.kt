@@ -53,6 +53,7 @@ import coil.request.ImageRequest
 import com.kumcompany.uptime.R
 import com.kumcompany.uptime.domain.model.Watch
 import com.kumcompany.uptime.presentation.components.InfoBox
+import com.kumcompany.uptime.presentation.components.SpecificationsBoxes
 import com.kumcompany.uptime.util.Constants.BASE_URL
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -151,7 +152,7 @@ fun BackgroundContent(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(fraction = imageFraction + 0.6f)
+                .fillMaxHeight(fraction = imageFraction + 0.45f)
                 .align(Alignment.TopStart),
         )
         Row(
@@ -254,8 +255,15 @@ fun BottomSheetContent(
             text = selectedWatch.description,
             fontSize = MaterialTheme.typography.body1.fontSize,
             color = contentColor,
+            maxLines = 5,
+            overflow = TextOverflow.Ellipsis
         )
-        // TODO: Ovde ide kod za dodatne kartice
+        Spacer(modifier = Modifier.height(8.dp))
+        SpecificationsBoxes(
+            selectedWatch,
+            infoBoxIconColor,
+            contentColor
+        )
 
 
     }

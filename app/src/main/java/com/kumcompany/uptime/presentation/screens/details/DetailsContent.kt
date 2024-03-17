@@ -46,6 +46,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -113,7 +114,11 @@ fun DetailsContent(
                 watchImage = watch.image,
                 imageFraction = currentSheetFraction,
                 onCloseClicked = {
-                    navController.popBackStack()
+                    if(navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED){
+                        navController.popBackStack()
+
+                    }
+
                 },
                 backGroundColor = Color(android.graphics.Color.parseColor(darkVibrant))
             )

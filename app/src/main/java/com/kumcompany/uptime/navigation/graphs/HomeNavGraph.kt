@@ -1,5 +1,11 @@
 package com.kumcompany.uptime.navigation.graphs
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -15,13 +21,13 @@ import com.kumcompany.uptime.presentation.screens.search.SearchScreen
 import com.kumcompany.uptime.util.Constants
 
 @Composable
-fun HomeNavGraph(navController: NavHostController,bottomPaddingValues: PaddingValues) {
+fun HomeNavGraph(navController: NavHostController, bottomPaddingValues: PaddingValues) {
     NavHost(
         navController = navController,
         route = Graphs.MAIN.route,
         startDestination = Screen.Home.route
     ) {
-        composable(Screen.Home.route){
+        composable(Screen.Home.route) {
             HomeScreen(
                 navController = navController,
                 bottomPaddingValues = bottomPaddingValues
@@ -36,7 +42,28 @@ fun HomeNavGraph(navController: NavHostController,bottomPaddingValues: PaddingVa
                 ) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = {
+                slideInVertically(
+                    initialOffsetY = { it },
+                    animationSpec = tween(durationMillis = 700, easing = LinearOutSlowInEasing)
+                )
+            },
+            exitTransition = {
+                ExitTransition.None
+            },
+            popEnterTransition = {
+                slideInVertically(
+                    initialOffsetY = { it },
+                    animationSpec = tween(durationMillis = 700, easing = LinearOutSlowInEasing)
+                )
+            },
+            popExitTransition = {
+                slideOutVertically(
+                    targetOffsetY = { it },
+                    animationSpec = tween(durationMillis = 700, easing = LinearOutSlowInEasing)
+                )
+            }
         ) {
             DetailsScreen(
                 navController

@@ -23,7 +23,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.exyte.animatednavbar.animation.indendshape.shapeCornerRadius
 
 @Composable
 fun SearchTopBar(
@@ -55,9 +54,9 @@ fun SearchWidget(
                 contentDescription = "SearchWidget"
             },
         shadowElevation = 5.dp,
-        color = MaterialTheme.colorScheme.primary,
+        color = MaterialTheme.colorScheme.inversePrimary,
         shape = RoundedCornerShape(34.dp),
-        ) {
+    ) {
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -76,7 +75,10 @@ fun SearchWidget(
             },
             leadingIcon = {
                 IconButton(onClick = {}, modifier = Modifier.alpha(ContentAlpha.medium)) {
-                    Icon(imageVector = Icons.Filled.Search, contentDescription = "search")
+                    Icon(
+                        imageVector = Icons.Filled.Search, contentDescription = "search",
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
                 }
             },
             trailingIcon = {
@@ -86,9 +88,12 @@ fun SearchWidget(
                             contentDescription = "CloseButton"
                         },
                     onClick = {
-                            onTextChange("")
+                        onTextChange("")
                     }) {
-                    Icon(imageVector = Icons.Filled.Close, contentDescription = "close")
+                    Icon(
+                        imageVector = Icons.Filled.Close, contentDescription = "close",
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
                 }
             },
             keyboardOptions = KeyboardOptions(

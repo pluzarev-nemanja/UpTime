@@ -119,7 +119,7 @@ fun EmptyContent(
         ) {
             Icon(
                 painter = painterResource(id = icon), contentDescription = "icon",
-                tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
+                tint = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.onPrimary else Color.DarkGray,
                 modifier = Modifier
                     .size(120.dp)
                     .alpha(alpha = alphaAnim)
@@ -129,7 +129,7 @@ fun EmptyContent(
                     .padding(top = 6.dp)
                     .alpha(alpha = alphaAnim),
                 text = message,
-                color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
+                color = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.onPrimary else Color.DarkGray,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Medium,
                 fontSize = MaterialTheme.typography.bodyLarge.fontSize

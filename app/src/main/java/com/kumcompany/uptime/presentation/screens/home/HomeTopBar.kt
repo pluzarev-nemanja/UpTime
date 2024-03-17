@@ -34,7 +34,7 @@ fun HomeTopBar() {
                     modifier = Modifier.size(55.dp).padding(start = 8.dp),
                     painter = painterResource(id = R.drawable.time),
                     contentDescription = "Watch icon",
-                    tint = MaterialTheme.colorScheme.inversePrimary
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
         },

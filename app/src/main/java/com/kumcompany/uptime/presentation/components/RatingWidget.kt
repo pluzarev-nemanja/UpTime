@@ -87,7 +87,10 @@ fun FilledHeart(
     scaleFactor: Float
 ) {
 
-    Canvas(modifier = Modifier.size(24.dp)) {
+    Canvas(modifier = Modifier.size(24.dp)
+        .semantics {
+            contentDescription = "FilledHeart"
+        }) {
         scale(scale = scaleFactor) {
 
             val canvasSize = size
